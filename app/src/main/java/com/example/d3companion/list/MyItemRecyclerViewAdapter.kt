@@ -10,6 +10,7 @@ import com.example.d3companion.R
 
 import com.example.d3companion.list.ItemFragment.OnListFragmentInteractionListener
 import com.example.d3companion.models.D3Class
+import com.example.d3companion.models.D3Item
 
 import kotlinx.android.synthetic.main.fragment_item.view.*
 
@@ -19,7 +20,7 @@ import kotlinx.android.synthetic.main.fragment_item.view.*
  * TODO: Replace the implementation with code for your data type.
  */
 class MyItemRecyclerViewAdapter(
-    private val mValues: List<D3Class>,
+    private val mValues: List<D3Item>,
     private val mListener: OnListFragmentInteractionListener?
 ) : RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder>() {
 
@@ -27,7 +28,7 @@ class MyItemRecyclerViewAdapter(
 
     init {
         mOnClickListener = View.OnClickListener { v ->
-            val item = v.tag as D3Class
+            val item = v.tag as D3Item
             // Notify the active callbacks interface (the activity, if the fragment is attached to
             // one) that an item has been selected.
             mListener?.onListFragmentInteraction(item)
