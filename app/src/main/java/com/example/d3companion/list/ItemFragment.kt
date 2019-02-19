@@ -12,7 +12,7 @@ import android.view.ViewGroup
 import com.example.d3companion.R
 
 import com.example.d3companion.list.dummy.DummyContent
-import com.example.d3companion.list.dummy.DummyContent.DummyItem
+import com.example.d3companion.models.D3Class
 
 /**
  * A fragment representing a list of Items.
@@ -80,7 +80,7 @@ class ItemFragment : Fragment() {
      */
     interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        fun onListFragmentInteraction(item: DummyItem?)
+        fun onListFragmentInteraction(item: D3Class?)
     }
 
     companion object {

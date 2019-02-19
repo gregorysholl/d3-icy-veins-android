@@ -1,7 +1,7 @@
 package com.example.d3companion.list.dummy
 
+import com.example.d3companion.models.D3Class
 import java.util.ArrayList
-import java.util.HashMap
 
 /**
  * Helper class for providing sample content for user interfaces created by
@@ -14,44 +14,18 @@ object DummyContent {
     /**
      * An array of sample (dummy) items.
      */
-    val ITEMS: MutableList<DummyItem> = ArrayList()
-
-    /**
-     * A map of sample (dummy) items, by ID.
-     */
-    val ITEM_MAP: MutableMap<String, DummyItem> = HashMap()
-
-    private val COUNT = 25
+    val ITEMS: MutableList<D3Class> = ArrayList()
 
     init {
-        // Add some sample items.
-        for (i in 1..COUNT) {
-            addItem(createDummyItem(i))
-        }
+        addItem(D3Class("Wizard"))
+        addItem(D3Class("Barbarian"))
+        addItem(D3Class("Monk"))
+        addItem(D3Class("Witch Doctor"))
+        addItem(D3Class("Demon Hunter"))
+        addItem(D3Class("Necromancer"))
     }
 
-    private fun addItem(item: DummyItem) {
+    private fun addItem(item: D3Class) {
         ITEMS.add(item)
-        ITEM_MAP.put(item.id, item)
-    }
-
-    private fun createDummyItem(position: Int): DummyItem {
-        return DummyItem(position.toString(), "Item " + position, makeDetails(position))
-    }
-
-    private fun makeDetails(position: Int): String {
-        val builder = StringBuilder()
-        builder.append("Details about Item: ").append(position)
-        for (i in 0..position - 1) {
-            builder.append("\nMore details information here.")
-        }
-        return builder.toString()
-    }
-
-    /**
-     * A dummy item representing a piece of content.
-     */
-    data class DummyItem(val id: String, val content: String, val details: String) {
-        override fun toString(): String = content
     }
 }
