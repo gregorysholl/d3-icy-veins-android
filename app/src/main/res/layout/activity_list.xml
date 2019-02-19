@@ -6,9 +6,14 @@
         android:layout_height="match_parent"
         tools:context=".list.ListActivity">
 
-    <fragment android:name="com.example.d3companion.list.ItemFragment"
-              android:id="@+id/item_fragment"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent" />
+    <!--<fragment android:name="com.example.d3companion.list.ItemFragment"-->
+    <!--android:id="@+id/item_fragment"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent" />-->
+
+    <FrameLayout
+            android:id="@+id/list_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,6 +13,7 @@ import com.example.d3companion.R
 
 import com.example.d3companion.list.dummy.DummyContent
 import com.example.d3companion.models.D3Item
+import com.example.d3companion.models.D3Type
 
 /**
  * A fragment representing a list of Items.
@@ -21,8 +22,23 @@ import com.example.d3companion.models.D3Item
  */
 class ItemFragment : Fragment() {
 
-    // TODO: Customize parameters
+    companion object {
+
+        const val ARG_COLUMN_COUNT = "column-count"
+
+        @JvmStatic
+        fun newInstance(type: D3Type, name: String? = null) = ItemFragment().apply {
+            arguments = Bundle().apply {
+                putString("type", type.name)
+                putString("name", name)
+            }
+        }
+    }
+
     private var columnCount = 1
+
+    private var type: D3Type = D3Type.Class
+    private var name: String? = null
 
     private var listener: OnListFragmentInteractionListener? = null
 
@@ -31,6 +47,8 @@ class ItemFragment : Fragment() {
 
         arguments?.let {
             columnCount = it.getInt(ARG_COLUMN_COUNT)
+            type = D3Type.valueOf(it.getString("type") ?: "Class")
+            name = it.getString("name")
         }
     }
 
@@ -47,7 +65,7 @@ class ItemFragment : Fragment() {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
                 }
-                adapter = MyItemRecyclerViewAdapter(DummyContent.ITEMS, listener)
+                adapter = MyItemRecyclerViewAdapter(getItems(), listener)
             }
         }
         return view
@@ -67,6 +85,9 @@ class ItemFragment : Fragment() {
         listener = null
     }
 
+    private fun getItems() = DummyContent.ITEMS.filter { it.type == type }
+
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -81,20 +102,5 @@ class ItemFragment : Fragment() {
     interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
         fun onListFragmentInteraction(item: D3Item?)
-    }
-
-    companion object {
-
-        // TODO: Customize parameter argument names
-        const val ARG_COLUMN_COUNT = "column-count"
-
-        // TODO: Customize parameter initialization
-        @JvmStatic
-        fun newInstance(columnCount: Int) =
-            ItemFragment().apply {
-                arguments = Bundle().apply {
-                    putInt(ARG_COLUMN_COUNT, columnCount)
-                }
-            }
     }
 }

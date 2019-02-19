@@ -20,6 +20,7 @@ object DummyContent {
 
     init {
         createClasses()
+        createBuilds()
     }
 
     private fun createClasses() {
