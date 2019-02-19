@@ -9,19 +9,38 @@ import com.example.d3companion.models.D3Type
 
 class ListActivity : AppCompatActivity(), ItemFragment.OnListFragmentInteractionListener {
 
+    private var currentFragmentType: D3Type = D3Type.Class
+
     override fun onListFragmentInteraction(item: D3Item?) {
         Log.d("DEBUG", item?.name)
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.list_fragment, ItemFragment.newInstance(D3Type.Build))
-        transaction.commit()
+        when(item?.type) {
+            D3Type.Class -> {
+                replaceFragmentToType(D3Type.Build)
+            }
+            D3Type.Build -> {
+                //TODO
+            }
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list)
 
+        replaceFragmentToType(D3Type.Class)
+    }
+
+    private fun replaceFragmentToType(type: D3Type) {
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.list_fragment, ItemFragment.newInstance(D3Type.Class))
+        transaction.replace(R.id.list_fragment, ItemFragment.newInstance(type))
         transaction.commit()
+        currentFragmentType = type
+    }
+
+    override fun onBackPressed() {
+        when(currentFragmentType) {
+            D3Type.Class -> super.onBackPressed()
+            D3Type.Build -> replaceFragmentToType(D3Type.Class)
+        }
     }
 }
