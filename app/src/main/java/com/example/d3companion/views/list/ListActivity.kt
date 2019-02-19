@@ -1,4 +1,4 @@
-package com.example.d3companion.list
+package com.example.d3companion.views.list
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

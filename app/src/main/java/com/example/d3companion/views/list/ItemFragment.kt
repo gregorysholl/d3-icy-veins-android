@@ -1,4 +1,4 @@
-package com.example.d3companion.list
+package com.example.d3companion.views.list
 
 import android.content.Context
 import android.os.Bundle
@@ -11,7 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.d3companion.R
 
-import com.example.d3companion.list.dummy.DummyContent
+import com.example.d3companion.views.list.dummy.DummyContent
 import com.example.d3companion.models.D3Item
 import com.example.d3companion.models.D3Type
 

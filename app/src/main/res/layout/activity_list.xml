@@ -4,9 +4,9 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".list.ListActivity">
+        tools:context=".views.list.ListActivity">
 
-    <!--<fragment android:name="com.example.d3companion.list.ItemFragment"-->
+    <!--<fragment android:name="com.example.d3companion.views.list.ItemFragment"-->
     <!--android:id="@+id/item_fragment"-->
     <!--android:layout_width="match_parent"-->
     <!--android:layout_height="match_parent" />-->

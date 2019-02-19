@@ -1,6 +1,5 @@
-package com.example.d3companion.list.dummy
+package com.example.d3companion.views.list.dummy
 
-import com.example.d3companion.models.D3Class
 import com.example.d3companion.models.D3Item
 import com.example.d3companion.models.D3Type
 import java.util.ArrayList

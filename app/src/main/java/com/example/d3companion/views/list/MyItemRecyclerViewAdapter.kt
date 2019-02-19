@@ -1,4 +1,4 @@
-package com.example.d3companion.list
+package com.example.d3companion.views.list
 
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
@@ -8,8 +8,7 @@ import android.widget.TextView
 import com.example.d3companion.R
 
 
-import com.example.d3companion.list.ItemFragment.OnListFragmentInteractionListener
-import com.example.d3companion.models.D3Class
+import com.example.d3companion.views.list.ItemFragment.OnListFragmentInteractionListener
 import com.example.d3companion.models.D3Item
 
 import kotlinx.android.synthetic.main.fragment_item.view.*
