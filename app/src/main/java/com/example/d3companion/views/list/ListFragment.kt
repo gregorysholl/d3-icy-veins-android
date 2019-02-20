@@ -11,8 +11,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.d3companion.R
 
-import com.example.d3companion.models.D3Item
-import com.example.d3companion.models.D3Type
+import com.example.d3companion.models.D3ViewElement
+import com.example.d3companion.models.D3ViewType
 import com.example.d3companion.presenters.list.ListPresenter
 import com.example.d3companion.presenters.list.ListPresenterProvider
 
@@ -25,7 +25,7 @@ class ListFragment : Fragment(), ListView {
         const val ARG_BUILD_NAME = "name"
 
         @JvmStatic
-        fun newInstance(type: D3Type, name: String? = null) = ListFragment().apply {
+        fun newInstance(type: D3ViewType, name: String? = null) = ListFragment().apply {
             arguments = Bundle().apply {
                 putString(ARG_TYPE, type.name)
                 putString(ARG_BUILD_NAME, name)
@@ -35,7 +35,7 @@ class ListFragment : Fragment(), ListView {
 
     private var columnCount = 1
 
-    private var type: D3Type = D3Type.Class
+    private var type: D3ViewType = D3ViewType.Class
     private var name: String? = null
 
     private var presenter: ListPresenterProvider? = null
@@ -47,7 +47,7 @@ class ListFragment : Fragment(), ListView {
 
         arguments?.let {
             columnCount = it.getInt(ARG_COLUMN_COUNT)
-            type = D3Type.valueOf(it.getString(ARG_TYPE) ?: "Class")
+            type = D3ViewType.valueOf(it.getString(ARG_TYPE) ?: "Class")
             name = it.getString(ARG_BUILD_NAME)
         }
 
@@ -91,7 +91,7 @@ class ListFragment : Fragment(), ListView {
         listener = null
     }
 
-    override fun showList(list: List<D3Item>) {
+    override fun showList(list: List<D3ViewElement>) {
         val recyclerView = view
         if (recyclerView is RecyclerView) {
             recyclerView.adapter = MyItemRecyclerViewAdapter(list, listener)
@@ -103,7 +103,7 @@ class ListFragment : Fragment(), ListView {
 
     interface Listener {
 
-        fun onSelectedItem(item: D3Item)
+        fun onSelectedItem(item: D3ViewElement)
 
         fun onError(message: String)
     }

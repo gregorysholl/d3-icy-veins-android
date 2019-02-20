@@ -1,10 +1,10 @@
 package com.example.d3companion.views.list
 
-import com.example.d3companion.models.D3Item
+import com.example.d3companion.models.D3ViewElement
 
 interface ListView {
 
-    fun showList(list: List<D3Item>)
+    fun showList(list: List<D3ViewElement>)
 
     fun showError()
 }

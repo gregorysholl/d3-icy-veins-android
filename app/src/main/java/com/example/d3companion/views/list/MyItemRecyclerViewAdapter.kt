@@ -8,12 +8,12 @@ import android.widget.TextView
 import com.example.d3companion.R
 
 import com.example.d3companion.views.list.ListFragment.Listener
-import com.example.d3companion.models.D3Item
+import com.example.d3companion.models.D3ViewElement
 
 import kotlinx.android.synthetic.main.fragment_item.view.*
 
 class MyItemRecyclerViewAdapter(
-    private val mValues: List<D3Item>,
+    private val mValues: List<D3ViewElement>,
     private val mListener: Listener?
 ) : RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder>() {
 
@@ -21,7 +21,7 @@ class MyItemRecyclerViewAdapter(
 
     init {
         mOnClickListener = View.OnClickListener { v ->
-            val item = v.tag as D3Item
+            val item = v.tag as D3ViewElement
             mListener?.onSelectedItem(item)
         }
     }
