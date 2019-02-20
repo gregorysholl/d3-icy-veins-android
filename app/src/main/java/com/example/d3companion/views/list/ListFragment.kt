@@ -94,7 +94,7 @@ class ListFragment : Fragment(), ListView {
     override fun showList(list: List<D3ViewElement>) {
         val recyclerView = view
         if (recyclerView is RecyclerView) {
-            recyclerView.adapter = MyItemRecyclerViewAdapter(list, listener)
+            recyclerView.adapter = ViewElementAdapter(list, listener)
         }
     }
 

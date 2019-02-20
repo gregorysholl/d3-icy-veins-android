@@ -12,10 +12,10 @@ import com.example.d3companion.models.D3ViewElement
 
 import kotlinx.android.synthetic.main.fragment_item.view.*
 
-class MyItemRecyclerViewAdapter(
+class ViewElementAdapter(
     private val mValues: List<D3ViewElement>,
     private val mListener: Listener?
-) : RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<ViewElementAdapter.ViewHolder>() {
 
     private val mOnClickListener: View.OnClickListener
 
