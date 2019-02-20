@@ -1,25 +1,29 @@
-package com.example.d3companion.views.list.dummy
+package com.example.d3companion.presenters.list
 
 import com.example.d3companion.models.D3Item
 import com.example.d3companion.models.D3Type
+import com.example.d3companion.views.list.ListView
+import java.lang.ref.WeakReference
 import java.util.ArrayList
 
-/**
- * Helper class for providing sample content for user interfaces created by
- * Android template wizards.
- *
- * TODO: Replace all uses of this class before publishing your app.
- */
-object DummyContent {
+class ListPresenter(view: ListView) : ListPresenterProvider {
 
-    /**
-     * An array of sample (dummy) items.
-     */
-    val ITEMS: MutableList<D3Item> = ArrayList()
+    private var weakView: WeakReference<ListView>? = null
+
+    private val items: MutableList<D3Item> = ArrayList()
 
     init {
-        createClasses()
+        weakView = WeakReference(view)
         createBuilds()
+        createClasses()
+    }
+
+    override fun getItems(type: D3Type) {
+        weakView?.get()?.showList(items.filter { it.type == type })
+    }
+
+    private fun addItem(item: D3Item) {
+        items.add(item)
     }
 
     private fun createClasses() {
@@ -36,9 +40,5 @@ object DummyContent {
         addItem(D3Item("Build 2", D3Type.Build))
         addItem(D3Item("Build 3", D3Type.Build))
         addItem(D3Item("Build 4", D3Type.Build))
-    }
-
-    private fun addItem(item: D3Item) {
-        ITEMS.add(item)
     }
 }

@@ -11,26 +11,24 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.d3companion.R
 
-import com.example.d3companion.views.list.dummy.DummyContent
 import com.example.d3companion.models.D3Item
 import com.example.d3companion.models.D3Type
+import com.example.d3companion.presenters.list.ListPresenter
+import com.example.d3companion.presenters.list.ListPresenterProvider
 
-/**
- * A fragment representing a list of Items.
- * Activities containing this fragment MUST implement the
- * [ItemFragment.OnListFragmentInteractionListener] interface.
- */
-class ItemFragment : Fragment() {
+class ItemFragment : Fragment(), ListView {
 
     companion object {
 
         const val ARG_COLUMN_COUNT = "column-count"
+        const val ARG_TYPE = "type"
+        const val ARG_BUILD_NAME = "name"
 
         @JvmStatic
         fun newInstance(type: D3Type, name: String? = null) = ItemFragment().apply {
             arguments = Bundle().apply {
-                putString("type", type.name)
-                putString("name", name)
+                putString(ARG_TYPE, type.name)
+                putString(ARG_BUILD_NAME, name)
             }
         }
     }
@@ -40,16 +38,20 @@ class ItemFragment : Fragment() {
     private var type: D3Type = D3Type.Class
     private var name: String? = null
 
-    private var listener: OnListFragmentInteractionListener? = null
+    private var presenter: ListPresenterProvider? = null
+
+    private var listener: Listener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         arguments?.let {
             columnCount = it.getInt(ARG_COLUMN_COUNT)
-            type = D3Type.valueOf(it.getString("type") ?: "Class")
-            name = it.getString("name")
+            type = D3Type.valueOf(it.getString(ARG_TYPE) ?: "Class")
+            name = it.getString(ARG_BUILD_NAME)
         }
+
+        presenter = ListPresenter(this)
     }
 
     override fun onCreateView(
@@ -58,25 +60,29 @@ class ItemFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_item_list, container, false)
 
-        // Set the adapter
         if (view is RecyclerView) {
             with(view) {
                 layoutManager = when {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
                 }
-                adapter = MyItemRecyclerViewAdapter(getItems(), listener)
             }
         }
         return view
     }
 
+    override fun onStart() {
+        super.onStart()
+
+        presenter?.getItems(type)
+    }
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if (context is OnListFragmentInteractionListener) {
+        if (context is Listener) {
             listener = context
         } else {
-            throw RuntimeException(context.toString() + " must implement OnListFragmentInteractionListener")
+            throw RuntimeException("$context must implement Listener")
         }
     }
 
@@ -85,22 +91,15 @@ class ItemFragment : Fragment() {
         listener = null
     }
 
-    private fun getItems() = DummyContent.ITEMS.filter { it.type == type }
+    override fun showList(list: List<D3Item>) {
+        val recyclerView = view
+        if (recyclerView is RecyclerView) {
+            recyclerView.adapter = MyItemRecyclerViewAdapter(list, listener)
+        }
+    }
 
+    interface Listener {
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     *
-     *
-     * See the Android Training lesson
-     * [Communicating with Other Fragments](http://developer.android.com/training/basics/fragments/communicating.html)
-     * for more information.
-     */
-    interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
-        fun onListFragmentInteraction(item: D3Item?)
+        fun onListFragmentInteraction(item: D3Item)
     }
 }

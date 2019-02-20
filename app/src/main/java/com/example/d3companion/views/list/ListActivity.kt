@@ -7,13 +7,13 @@ import com.example.d3companion.R
 import com.example.d3companion.models.D3Item
 import com.example.d3companion.models.D3Type
 
-class ListActivity : AppCompatActivity(), ItemFragment.OnListFragmentInteractionListener {
+class ListActivity : AppCompatActivity(), ItemFragment.Listener {
 
     private var currentFragmentType: D3Type = D3Type.Class
 
-    override fun onListFragmentInteraction(item: D3Item?) {
-        Log.d("DEBUG", item?.name)
-        when(item?.type) {
+    override fun onListFragmentInteraction(item: D3Item) {
+        Log.d("DEBUG", item.name)
+        when(item.type) {
             D3Type.Class -> {
                 replaceFragmentToType(D3Type.Build)
             }

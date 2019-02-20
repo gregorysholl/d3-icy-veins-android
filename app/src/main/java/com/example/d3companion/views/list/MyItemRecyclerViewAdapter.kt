@@ -8,19 +8,14 @@ import android.widget.TextView
 import com.example.d3companion.R
 
 
-import com.example.d3companion.views.list.ItemFragment.OnListFragmentInteractionListener
+import com.example.d3companion.views.list.ItemFragment.Listener
 import com.example.d3companion.models.D3Item
 
 import kotlinx.android.synthetic.main.fragment_item.view.*
 
-/**
- * [RecyclerView.Adapter] that can display a [DummyItem] and makes a call to the
- * specified [OnListFragmentInteractionListener].
- * TODO: Replace the implementation with code for your data type.
- */
 class MyItemRecyclerViewAdapter(
     private val mValues: List<D3Item>,
-    private val mListener: OnListFragmentInteractionListener?
+    private val mListener: Listener?
 ) : RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder>() {
 
     private val mOnClickListener: View.OnClickListener
@@ -28,8 +23,6 @@ class MyItemRecyclerViewAdapter(
     init {
         mOnClickListener = View.OnClickListener { v ->
             val item = v.tag as D3Item
-            // Notify the active callbacks interface (the activity, if the fragment is attached to
-            // one) that an item has been selected.
             mListener?.onListFragmentInteraction(item)
         }
     }
