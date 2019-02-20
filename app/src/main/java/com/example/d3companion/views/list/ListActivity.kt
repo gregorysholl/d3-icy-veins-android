@@ -1,11 +1,13 @@
 package com.example.d3companion.views.list
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.example.d3companion.R
 import com.example.d3companion.models.D3Item
 import com.example.d3companion.models.D3Type
+import com.example.d3companion.views.build.BuildActivity
 
 class ListActivity : AppCompatActivity(), ListFragment.Listener {
 
@@ -39,7 +41,7 @@ class ListActivity : AppCompatActivity(), ListFragment.Listener {
                 replaceFragmentToType(D3Type.Build)
             }
             D3Type.Build -> {
-                //TODO
+                startActivity(Intent(baseContext, BuildActivity::class.java))
             }
         }
     }
