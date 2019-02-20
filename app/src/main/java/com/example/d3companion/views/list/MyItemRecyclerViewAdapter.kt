@@ -23,7 +23,7 @@ class MyItemRecyclerViewAdapter(
     init {
         mOnClickListener = View.OnClickListener { v ->
             val item = v.tag as D3Item
-            mListener?.onListFragmentInteraction(item)
+            mListener?.onSelectedItem(item)
         }
     }
 

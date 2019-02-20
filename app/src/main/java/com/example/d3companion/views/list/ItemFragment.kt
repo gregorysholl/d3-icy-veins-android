@@ -98,8 +98,13 @@ class ItemFragment : Fragment(), ListView {
         }
     }
 
+    override fun showError() {
+    }
+
     interface Listener {
 
-        fun onListFragmentInteraction(item: D3Item)
+        fun onSelectedItem(item: D3Item)
+
+        fun onError(message: String)
     }
 }
