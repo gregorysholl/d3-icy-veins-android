@@ -16,7 +16,7 @@ import com.example.d3companion.models.D3Type
 import com.example.d3companion.presenters.list.ListPresenter
 import com.example.d3companion.presenters.list.ListPresenterProvider
 
-class ItemFragment : Fragment(), ListView {
+class ListFragment : Fragment(), ListView {
 
     companion object {
 
@@ -25,7 +25,7 @@ class ItemFragment : Fragment(), ListView {
         const val ARG_BUILD_NAME = "name"
 
         @JvmStatic
-        fun newInstance(type: D3Type, name: String? = null) = ItemFragment().apply {
+        fun newInstance(type: D3Type, name: String? = null) = ListFragment().apply {
             arguments = Bundle().apply {
                 putString(ARG_TYPE, type.name)
                 putString(ARG_BUILD_NAME, name)

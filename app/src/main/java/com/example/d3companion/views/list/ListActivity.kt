@@ -7,7 +7,7 @@ import com.example.d3companion.R
 import com.example.d3companion.models.D3Item
 import com.example.d3companion.models.D3Type
 
-class ListActivity : AppCompatActivity(), ItemFragment.Listener {
+class ListActivity : AppCompatActivity(), ListFragment.Listener {
 
     private var currentFragmentType: D3Type = D3Type.Class
 
@@ -26,9 +26,9 @@ class ListActivity : AppCompatActivity(), ItemFragment.Listener {
     }
 
     private fun replaceFragmentToType(type: D3Type) {
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.list_fragment, ItemFragment.newInstance(type))
-        transaction.commit()
+        val ft = supportFragmentManager.beginTransaction()
+        ft.replace(R.id.list_fragment, ListFragment.newInstance(type))
+        ft.commit()
         currentFragmentType = type
     }
 

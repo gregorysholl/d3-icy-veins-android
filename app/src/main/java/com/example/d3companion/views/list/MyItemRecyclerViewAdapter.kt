@@ -7,8 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.example.d3companion.R
 
-
-import com.example.d3companion.views.list.ItemFragment.Listener
+import com.example.d3companion.views.list.ListFragment.Listener
 import com.example.d3companion.models.D3Item
 
 import kotlinx.android.synthetic.main.fragment_item.view.*
@@ -28,8 +27,7 @@ class MyItemRecyclerViewAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.fragment_item, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.fragment_item, parent, false)
         return ViewHolder(view)
     }
 

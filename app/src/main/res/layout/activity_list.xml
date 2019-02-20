@@ -6,11 +6,6 @@
         android:layout_height="match_parent"
         tools:context=".views.list.ListActivity">
 
-    <!--<fragment android:name="com.example.d3companion.views.list.ItemFragment"-->
-    <!--android:id="@+id/item_fragment"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent" />-->
-
     <FrameLayout
             android:id="@+id/list_fragment"
             android:layout_width="match_parent"
