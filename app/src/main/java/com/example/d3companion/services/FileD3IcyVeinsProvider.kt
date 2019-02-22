@@ -6,7 +6,7 @@ import java.lang.ref.WeakReference
 
 class FileD3IcyVeinsProvider(
     context: Context?,
-    private val listener: D3IcyVeinsListener?
+    private var listener: D3IcyVeinsListener?
 ) : D3IcyVeinsProvider {
 
     private val weakContext: WeakReference<Context?> = WeakReference(context)
@@ -26,5 +26,9 @@ class FileD3IcyVeinsProvider(
         }
 
         listener?.onDataRetrieved(text)
+    }
+
+    fun setListener(newListener: D3IcyVeinsListener) {
+        listener = newListener
     }
 }
