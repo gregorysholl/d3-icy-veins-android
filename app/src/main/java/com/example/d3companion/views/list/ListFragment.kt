@@ -15,6 +15,7 @@ import com.example.d3companion.models.D3ViewElement
 import com.example.d3companion.models.D3ViewType
 import com.example.d3companion.presenters.list.ListPresenter
 import com.example.d3companion.presenters.list.ListPresenterProvider
+import com.example.d3companion.services.FileD3IcyVeinsProvider
 
 class ListFragment : Fragment(), ListView {
 
@@ -51,7 +52,7 @@ class ListFragment : Fragment(), ListView {
             name = it.getString(ARG_BUILD_NAME)
         }
 
-        presenter = ListPresenter(this)
+        presenter = ListPresenter(this, FileD3IcyVeinsProvider(requireContext()))
     }
 
     override fun onCreateView(

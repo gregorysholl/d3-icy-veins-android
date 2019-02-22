@@ -2,6 +2,8 @@ package com.example.d3companion.services
 
 interface D3IcyVeinsProvider {
 
+    var listener: D3IcyVeinsListener?
+
     fun obtainData()
 }
 
