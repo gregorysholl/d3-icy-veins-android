@@ -5,11 +5,12 @@ import com.example.d3companion.R
 import java.lang.ref.WeakReference
 
 class FileD3IcyVeinsProvider(
-    context: Context?,
-    private var listener: D3IcyVeinsListener?
+    context: Context?
 ) : D3IcyVeinsProvider {
 
     private val weakContext: WeakReference<Context?> = WeakReference(context)
+
+    override var listener: D3IcyVeinsListener? = null
 
     override fun obtainData() {
         if (weakContext.get()?.resources == null) {
@@ -26,9 +27,5 @@ class FileD3IcyVeinsProvider(
         }
 
         listener?.onDataRetrieved(text)
-    }
-
-    fun setListener(newListener: D3IcyVeinsListener) {
-        listener = newListener
     }
 }

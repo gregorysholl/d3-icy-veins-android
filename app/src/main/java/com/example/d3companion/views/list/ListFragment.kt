@@ -52,7 +52,7 @@ class ListFragment : Fragment(), ListView {
             name = it.getString(ARG_BUILD_NAME)
         }
 
-        presenter = ListPresenter(this, FileD3IcyVeinsProvider(requireContext(), null))
+        presenter = ListPresenter(this, FileD3IcyVeinsProvider(requireContext()))
     }
 
     override fun onCreateView(

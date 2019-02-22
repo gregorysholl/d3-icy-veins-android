@@ -9,23 +9,34 @@ import com.example.d3companion.views.list.ListView
 import java.lang.ref.WeakReference
 import java.util.ArrayList
 
-class ListPresenter(view: ListView, provider: D3IcyVeinsProvider) : ListPresenterProvider, D3IcyVeinsListener {
+class ListPresenter(
+    view: ListView,
+    provider: D3IcyVeinsProvider
+) : ListPresenterProvider, D3IcyVeinsListener {
 
-    private var weakView: WeakReference<ListView>? = null
-    private val dataProvider: WeakReference<D3IcyVeinsProvider>? = WeakReference(provider)
+    private var weakView: WeakReference<ListView>? = WeakReference(view)
+
+    private var weakProvider: WeakReference<D3IcyVeinsProvider>? = WeakReference(provider)
 
     private val items: MutableList<D3ViewElement> = ArrayList()
 
     init {
-        weakView = WeakReference(view)
-        dataProvider.listener = this
         createBuilds()
         createClasses()
-        dataProvider.obtainData()
+        weakProvider?.get()?.listener = this
+        weakProvider?.get()?.obtainData()
     }
 
     override fun getItems(type: D3ViewType) {
         weakView?.get()?.showList(items.filter { it.type == type })
+    }
+
+    override fun onDataRetrieved(data: String) {
+        Log.d("DATA", data)
+    }
+
+    override fun onError(message: String) {
+        Log.d("ERROR", message)
     }
 
     private fun addItem(item: D3ViewElement) {
@@ -46,13 +57,5 @@ class ListPresenter(view: ListView, provider: D3IcyVeinsProvider) : ListPresente
         addItem(D3ViewElement("Build 2", D3ViewType.Build))
         addItem(D3ViewElement("Build 3", D3ViewType.Build))
         addItem(D3ViewElement("Build 4", D3ViewType.Build))
-    }
-
-    override fun onDataRetrieved(data: String) {
-        Log.d("DATA", data)
-    }
-
-    override fun onError(message: String) {
-        Log.d("ERROR", message)
     }
 }
