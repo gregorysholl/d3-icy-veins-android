@@ -24,8 +24,6 @@ class ListPresenter(
     private val items: MutableList<D3ViewElement> = ArrayList()
 
     init {
-        createBuilds()
-        createClasses()
         weakProvider?.get()?.listener = this
         weakProvider?.get()?.obtainData()
     }
@@ -43,6 +41,8 @@ class ListPresenter(
         val list = gson.fromJson<List<D3Class>>(data, listType)
 
         Log.d("DATA", "Retrieved list length = ${list.count()}")
+
+        createClasses(list)
     }
 
     override fun onError(message: String) {
@@ -53,13 +53,10 @@ class ListPresenter(
         items.add(item)
     }
 
-    private fun createClasses() {
-        addItem(D3ViewElement("Wizard", D3ViewType.Class))
-        addItem(D3ViewElement("Barbarian", D3ViewType.Class))
-        addItem(D3ViewElement("Monk", D3ViewType.Class))
-        addItem(D3ViewElement("Witch Doctor", D3ViewType.Class))
-        addItem(D3ViewElement("Demon Hunter", D3ViewType.Class))
-        addItem(D3ViewElement("Necromancer", D3ViewType.Class))
+    private fun createClasses(list: List<D3Class>) {
+        for (d3Class in list) {
+            items.add(D3ViewElement(d3Class.name, D3ViewType.Class))
+        }
     }
 
     private fun createBuilds() {
