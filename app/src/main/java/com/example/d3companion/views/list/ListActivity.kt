@@ -23,12 +23,13 @@ class ListActivity : AppCompatActivity(), ListView, ListFragment.Listener {
         setContentView(R.layout.activity_list)
 
         presenter = ListPresenter(this, FileD3IcyVeinsProvider(baseContext))
+        presenter?.getClasses()
     }
 
     override fun onBackPressed() {
         when(currentFragmentType) {
             D3ViewType.Class -> super.onBackPressed()
-            D3ViewType.Build -> replaceFragmentToType(D3ViewType.Class)
+            D3ViewType.Build -> presenter?.getClasses()
         }
     }
 
@@ -36,7 +37,7 @@ class ListActivity : AppCompatActivity(), ListView, ListFragment.Listener {
         Log.d("DEBUG", item.name)
         when(item.type) {
             D3ViewType.Class -> {
-                replaceFragmentToType(D3ViewType.Build)
+                presenter?.getBuilds(item.name)
             }
             D3ViewType.Build -> {
                 startActivity(Intent(baseContext, BuildActivity::class.java))
@@ -48,17 +49,12 @@ class ListActivity : AppCompatActivity(), ListView, ListFragment.Listener {
     }
 
     override fun showList(list: List<D3ViewElement>) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val ft = supportFragmentManager.beginTransaction()
+        ft.replace(R.id.list_fragment, ListFragment.newInstance(list))
+        ft.commit()
+        currentFragmentType = list.firstOrNull()?.type ?: D3ViewType.Class
     }
 
     override fun showError() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    private fun replaceFragmentToType(type: D3ViewType) {
-        val ft = supportFragmentManager.beginTransaction()
-        ft.replace(R.id.list_fragment, ListFragment.newInstance(type))
-        ft.commit()
-        currentFragmentType = type
     }
 }
