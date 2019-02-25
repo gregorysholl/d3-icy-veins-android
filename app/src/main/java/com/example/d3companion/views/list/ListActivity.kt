@@ -7,9 +7,14 @@ import android.util.Log
 import com.example.d3companion.R
 import com.example.d3companion.models.D3ViewElement
 import com.example.d3companion.models.D3ViewType
+import com.example.d3companion.presenters.list.ListPresenter
+import com.example.d3companion.presenters.list.ListPresenterProvider
+import com.example.d3companion.services.FileD3IcyVeinsProvider
 import com.example.d3companion.views.build.BuildActivity
 
-class ListActivity : AppCompatActivity(), ListFragment.Listener {
+class ListActivity : AppCompatActivity(), ListView, ListFragment.Listener {
+
+    private var presenter: ListPresenterProvider? = null
 
     private var currentFragmentType: D3ViewType = D3ViewType.Class
 
@@ -17,7 +22,7 @@ class ListActivity : AppCompatActivity(), ListFragment.Listener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list)
 
-        replaceFragmentToType(D3ViewType.Class)
+        presenter = ListPresenter(this, FileD3IcyVeinsProvider(baseContext))
     }
 
     override fun onBackPressed() {
@@ -25,13 +30,6 @@ class ListActivity : AppCompatActivity(), ListFragment.Listener {
             D3ViewType.Class -> super.onBackPressed()
             D3ViewType.Build -> replaceFragmentToType(D3ViewType.Class)
         }
-    }
-
-    private fun replaceFragmentToType(type: D3ViewType) {
-        val ft = supportFragmentManager.beginTransaction()
-        ft.replace(R.id.list_fragment, ListFragment.newInstance(type))
-        ft.commit()
-        currentFragmentType = type
     }
 
     override fun onSelectedItem(item: D3ViewElement) {
@@ -47,5 +45,20 @@ class ListActivity : AppCompatActivity(), ListFragment.Listener {
     }
 
     override fun onError(message: String) {
+    }
+
+    override fun showList(list: List<D3ViewElement>) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun showError() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    private fun replaceFragmentToType(type: D3ViewType) {
+        val ft = supportFragmentManager.beginTransaction()
+        ft.replace(R.id.list_fragment, ListFragment.newInstance(type))
+        ft.commit()
+        currentFragmentType = type
     }
 }
