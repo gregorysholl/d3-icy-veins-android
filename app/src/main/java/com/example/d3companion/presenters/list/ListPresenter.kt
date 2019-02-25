@@ -1,11 +1,14 @@
 package com.example.d3companion.presenters.list
 
 import android.util.Log
+import com.example.d3companion.models.D3Class
 import com.example.d3companion.models.D3ViewElement
 import com.example.d3companion.models.D3ViewType
 import com.example.d3companion.services.D3IcyVeinsListener
 import com.example.d3companion.services.D3IcyVeinsProvider
 import com.example.d3companion.views.list.ListView
+import com.google.gson.GsonBuilder
+import com.google.gson.reflect.TypeToken
 import java.lang.ref.WeakReference
 import java.util.ArrayList
 
@@ -33,6 +36,13 @@ class ListPresenter(
 
     override fun onDataRetrieved(data: String) {
         Log.d("DATA", data)
+
+        val gson = GsonBuilder().setPrettyPrinting().create()
+
+        val listType = object : TypeToken<List<D3Class>>() { }.type
+        val list = gson.fromJson<List<D3Class>>(data, listType)
+
+        Log.d("DATA", "Retrieved list length = ${list.count()}")
     }
 
     override fun onError(message: String) {
