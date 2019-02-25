@@ -12,29 +12,25 @@ import android.view.ViewGroup
 import com.example.d3companion.R
 
 import com.example.d3companion.models.D3ViewElement
-import com.example.d3companion.models.D3ViewType
 
 class ListFragment : Fragment() {
 
     companion object {
 
         const val ARG_COLUMN_COUNT = "column-count"
-        const val ARG_TYPE = "type"
-        const val ARG_BUILD_NAME = "name"
+        const val ARG_LIST = "d3-list"
 
         @JvmStatic
-        fun newInstance(type: D3ViewType, name: String? = null) = ListFragment().apply {
+        fun newInstance(list: List<D3ViewElement>) = ListFragment().apply {
             arguments = Bundle().apply {
-                putString(ARG_TYPE, type.name)
-                putString(ARG_BUILD_NAME, name)
+                putParcelableArrayList(ARG_LIST, ArrayList(list))
             }
         }
     }
 
     private var columnCount = 1
 
-    private var type: D3ViewType = D3ViewType.Class
-    private var name: String? = null
+    private var list: List<D3ViewElement> = emptyList()
 
     private var listener: Listener? = null
 
@@ -43,8 +39,7 @@ class ListFragment : Fragment() {
 
         arguments?.let {
             columnCount = it.getInt(ARG_COLUMN_COUNT)
-            type = D3ViewType.valueOf(it.getString(ARG_TYPE) ?: "Class")
-            name = it.getString(ARG_BUILD_NAME)
+            list = it.getParcelableArrayList(ARG_LIST) ?: emptyList()
         }
     }
 
@@ -60,6 +55,7 @@ class ListFragment : Fragment() {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
                 }
+                adapter = ViewElementAdapter(list, listener)
             }
         }
         return view

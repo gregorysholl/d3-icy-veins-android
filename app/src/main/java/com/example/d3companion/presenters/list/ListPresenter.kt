@@ -22,17 +22,22 @@ class ListPresenter(
 
     private var list: List<D3Class> = emptyList()
 
+    private var selectedClassName: String? = null
+
     init {
         weakProvider?.get()?.listener = this
-        weakProvider?.get()?.obtainData()
     }
 
     override fun getClasses() {
-        weakView?.get()?.showList(getClassViews())
+        selectedClassName = null
+
+        showList()
     }
 
     override fun getBuilds(className: String) {
-        weakView?.get()?.showList(getBuildViews(className))
+        selectedClassName = className
+
+        showList()
     }
 
     override fun onDataRetrieved(data: String) {
@@ -42,10 +47,33 @@ class ListPresenter(
         val listType = object : TypeToken<List<D3Class>>() { }.type
 
         list = gson.fromJson<List<D3Class>>(data, listType)
+
+        showList()
     }
 
     override fun onError(message: String) {
         weakView?.get()?.showError()
+    }
+
+    private fun showList() {
+        if (list.isEmpty()) {
+            weakProvider?.get()?.obtainData()
+            return
+        }
+
+        val views = if (selectedClassName != null) {
+            getBuildViews(selectedClassName)
+        } else {
+            getClassViews()
+        }
+        weakView?.get()?.showList(views)
+    }
+
+    private fun obtainData() {
+        if (!list.isEmpty()) {
+            return
+        }
+        weakProvider?.get()?.obtainData()
     }
 
     private fun getClassViews(): List<D3ViewElement> {
@@ -56,16 +84,15 @@ class ListPresenter(
         return views
     }
 
-    private fun getBuildViews(className: String): List<D3ViewElement> {
+    private fun getBuildViews(className: String?): List<D3ViewElement> {
         val views = emptyList<D3ViewElement>().toMutableList()
+        if (className == null) {
+            return views
+        }
 
-        try {
-            val selectedClass = list.first { it.name == className }
-            for (build in selectedClass.builds) {
-                views.add(D3ViewElement(build.name, D3ViewType.Build))
-            }
-        } catch (e: NoSuchElementException) {
-            weakView?.get()?.showError()
+        val selectedClass = list.firstOrNull { it.name == className } ?: return views
+        for (build in selectedClass.builds) {
+            views.add(D3ViewElement(build.name, D3ViewType.Build))
         }
 
         return views
