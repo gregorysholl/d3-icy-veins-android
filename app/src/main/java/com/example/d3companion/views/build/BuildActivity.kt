@@ -25,6 +25,25 @@ class BuildActivity : AppCompatActivity() {
 //        val build = intent.extras?.getParcelable<D3Build>(ARG_BUILD) ?: throw RuntimeException("BuildActivity expected D3Build as argument")
 //        buildInfo = build
         initD3Build()
+
+        setupView()
+    }
+
+    private fun setupView() {
+        supportActionBar?.title = buildInfo.className
+        supportActionBar?.subtitle = buildInfo.tier + " Build"
+
+        buildActivity_name.text = buildInfo.name
+
+        addSkillFragments()
+    }
+
+    private fun addSkillFragments() {
+        for (activeSkill in buildInfo.skills.active) {
+            val ft = supportFragmentManager.beginTransaction()
+            ft.add(R.id.buildActivity_skillContainer, SkillFragment.newInstance(activeSkill))
+            ft.commit()
+        }
     }
 
     private fun initD3Build() {
