@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.example.d3companion.R
+import com.example.d3companion.models.D3Build
 import com.example.d3companion.models.D3ViewElement
 import com.example.d3companion.models.D3ViewType
 import com.example.d3companion.presenters.list.ListPresenter
@@ -40,7 +41,7 @@ class ListActivity : AppCompatActivity(), ListView, ListFragment.Listener {
                 presenter?.getBuilds(item.name)
             }
             D3ViewType.Build -> {
-                startActivity(Intent(baseContext, BuildActivity::class.java))
+                presenter?.getBuild(item.name)
             }
         }
     }
@@ -53,6 +54,13 @@ class ListActivity : AppCompatActivity(), ListView, ListFragment.Listener {
         ft.replace(R.id.list_fragment, ListFragment.newInstance(list))
         ft.commit()
         currentFragmentType = list.firstOrNull()?.type ?: D3ViewType.Class
+    }
+
+    override fun showBuildActivity(build: D3Build) {
+        val intent = Intent(baseContext, BuildActivity::class.java).apply {
+            putExtra(BuildActivity.ARG_BUILD, build)
+        }
+        startActivity(intent)
     }
 
     override fun showError() {

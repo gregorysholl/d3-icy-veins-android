@@ -5,4 +5,6 @@ interface ListPresenterProvider {
     fun getClasses()
 
     fun getBuilds(className: String)
+
+    fun getBuild(name: String)
 }

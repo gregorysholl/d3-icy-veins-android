@@ -15,7 +15,6 @@ class ListPresenter(
     view: ListView,
     provider: D3IcyVeinsProvider
 ) : ListPresenterProvider, D3IcyVeinsListener {
-
     private var weakView: WeakReference<ListView>? = WeakReference(view)
 
     private var weakProvider: WeakReference<D3IcyVeinsProvider>? = WeakReference(provider)
@@ -38,6 +37,21 @@ class ListPresenter(
         selectedClassName = className
 
         showList()
+    }
+
+    override fun getBuild(name: String) {
+        if (selectedClassName == null) {
+            weakView?.get()?.showError()
+            return
+        }
+
+        val build = list.firstOrNull { it.name == selectedClassName }?.builds?.firstOrNull { it.name == name }
+        if (build == null) {
+            weakView?.get()?.showError()
+            return
+        }
+
+        weakView?.get()?.showBuildActivity(build)
     }
 
     override fun onDataRetrieved(data: String) {
