@@ -50,9 +50,6 @@ class ListActivity : AppCompatActivity(), ListView, ListFragment.Listener {
         }
     }
 
-    override fun onError(message: String) {
-    }
-
     override fun showList(list: List<D3ViewElement>) {
         listActivity_container.visibility = View.VISIBLE
         listActivity_progressBar.visibility = View.GONE
