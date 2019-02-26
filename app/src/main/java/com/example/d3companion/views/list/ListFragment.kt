@@ -78,7 +78,5 @@ class ListFragment : Fragment() {
     interface Listener {
 
         fun onSelectedItem(item: D3ViewElement)
-
-        fun onError(message: String)
     }
 }
