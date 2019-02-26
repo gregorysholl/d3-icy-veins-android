@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import com.example.d3companion.R
 import com.example.d3companion.models.D3Build
 import com.example.d3companion.models.D3ViewElement
@@ -12,6 +13,9 @@ import com.example.d3companion.presenters.list.ListPresenter
 import com.example.d3companion.presenters.list.ListPresenterProvider
 import com.example.d3companion.services.FileD3IcyVeinsProvider
 import com.example.d3companion.views.build.BuildActivity
+import kotlinx.android.synthetic.main.activity_list.*
+
+//TODO: Add pull-to-refresh?
 
 class ListActivity : AppCompatActivity(), ListView, ListFragment.Listener {
 
@@ -50,8 +54,11 @@ class ListActivity : AppCompatActivity(), ListView, ListFragment.Listener {
     }
 
     override fun showList(list: List<D3ViewElement>) {
+        listActivity_container.visibility = View.VISIBLE
+        listActivity_progressBar.visibility = View.GONE
+
         val ft = supportFragmentManager.beginTransaction()
-        ft.replace(R.id.list_fragment, ListFragment.newInstance(list))
+        ft.replace(R.id.listActivity_container, ListFragment.newInstance(list))
         ft.commit()
         currentFragmentType = list.firstOrNull()?.type ?: D3ViewType.Class
     }
@@ -64,5 +71,9 @@ class ListActivity : AppCompatActivity(), ListView, ListFragment.Listener {
     }
 
     override fun showError() {
+        listActivity_container.visibility = View.GONE
+        listActivity_progressBar.visibility = View.GONE
+
+        //TODO: Show alert
     }
 }
