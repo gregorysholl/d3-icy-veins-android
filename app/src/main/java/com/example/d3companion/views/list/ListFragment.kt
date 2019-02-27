@@ -55,7 +55,7 @@ class ListFragment : Fragment() {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
                 }
-                adapter = ViewElementAdapter(list, listener)
+                adapter = ListViewElementAdapter(list, listener)
             }
         }
         return view
