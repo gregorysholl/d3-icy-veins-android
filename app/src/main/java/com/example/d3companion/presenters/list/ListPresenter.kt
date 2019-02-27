@@ -13,7 +13,7 @@ import java.lang.ref.WeakReference
 class ListPresenter(
     view: ListView,
     provider: D3IcyVeinsContract.Provider
-) : ListPresenterProvider, D3IcyVeinsContract.Listener {
+) : ListContract.Presenter, D3IcyVeinsContract.Listener {
 
     private var weakView: WeakReference<ListView>? = WeakReference(view)
 

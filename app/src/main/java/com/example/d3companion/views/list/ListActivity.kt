@@ -9,8 +9,8 @@ import com.example.d3companion.R
 import com.example.d3companion.models.D3Build
 import com.example.d3companion.models.D3ViewElement
 import com.example.d3companion.models.D3ViewType
+import com.example.d3companion.presenters.list.ListContract
 import com.example.d3companion.presenters.list.ListPresenter
-import com.example.d3companion.presenters.list.ListPresenterProvider
 import com.example.d3companion.services.FileD3IcyVeinsProvider
 import com.example.d3companion.views.build.BuildActivity
 import kotlinx.android.synthetic.main.activity_list.*
@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.activity_list.*
 
 class ListActivity : AppCompatActivity(), ListView, ListFragment.Listener {
 
-    private var presenter: ListPresenterProvider? = null
+    private var presenter: ListContract.Presenter? = null
 
     private var currentFragmentType: D3ViewType = D3ViewType.Class
 
