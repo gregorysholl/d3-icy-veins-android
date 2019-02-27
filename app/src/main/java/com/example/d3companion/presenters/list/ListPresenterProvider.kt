@@ -1,10 +1,25 @@
 package com.example.d3companion.presenters.list
 
-interface ListPresenterProvider {
+import com.example.d3companion.models.D3Build
+import com.example.d3companion.models.D3ViewElement
 
-    fun getClasses()
+interface ListContract {
 
-    fun getBuilds(className: String)
+    interface Presenter {
 
-    fun getBuild(name: String)
+        fun getClasses()
+
+        fun getBuilds(className: String)
+
+        fun getBuild(name: String)
+    }
+
+    interface View {
+
+        fun showList(list: List<D3ViewElement>)
+
+        fun showBuildActivity(build: D3Build)
+
+        fun showError()
+    }
 }
