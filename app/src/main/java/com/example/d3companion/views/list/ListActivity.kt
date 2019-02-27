@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.activity_list.*
 
 //TODO: Add pull-to-refresh?
 
-class ListActivity : AppCompatActivity(), ListView, ListFragment.Listener {
+class ListActivity : AppCompatActivity(), ListContract.View, ListFragment.Listener {
 
     private var presenter: ListContract.Presenter? = null
 

@@ -5,17 +5,16 @@ import com.example.d3companion.models.D3Class
 import com.example.d3companion.models.D3ViewElement
 import com.example.d3companion.models.D3ViewType
 import com.example.d3companion.services.D3IcyVeinsContract
-import com.example.d3companion.views.list.ListView
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import java.lang.ref.WeakReference
 
 class ListPresenter(
-    view: ListView,
+    view: ListContract.View,
     provider: D3IcyVeinsContract.Provider
 ) : ListContract.Presenter, D3IcyVeinsContract.Listener {
 
-    private var weakView: WeakReference<ListView>? = WeakReference(view)
+    private var weakView: WeakReference<ListContract.View>? = WeakReference(view)
 
     private var weakProvider: WeakReference<D3IcyVeinsContract.Provider>? = WeakReference(provider)
 
