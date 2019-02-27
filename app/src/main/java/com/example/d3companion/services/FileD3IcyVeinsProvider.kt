@@ -6,11 +6,11 @@ import java.lang.ref.WeakReference
 
 class FileD3IcyVeinsProvider(
     context: Context?
-) : D3IcyVeinsProvider {
+) : D3IcyVeinsContract.Provider {
 
     private val weakContext: WeakReference<Context?> = WeakReference(context)
 
-    override var listener: D3IcyVeinsListener? = null
+    override var listener: D3IcyVeinsContract.Listener? = null
 
     override fun obtainData() {
         if (weakContext.get()?.resources == null) {
