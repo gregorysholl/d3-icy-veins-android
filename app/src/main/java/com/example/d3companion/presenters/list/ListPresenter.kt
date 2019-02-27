@@ -4,8 +4,7 @@ import android.util.Log
 import com.example.d3companion.models.D3Class
 import com.example.d3companion.models.D3ViewElement
 import com.example.d3companion.models.D3ViewType
-import com.example.d3companion.services.D3IcyVeinsListener
-import com.example.d3companion.services.D3IcyVeinsProvider
+import com.example.d3companion.services.D3IcyVeinsContract
 import com.example.d3companion.views.list.ListView
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
@@ -13,11 +12,12 @@ import java.lang.ref.WeakReference
 
 class ListPresenter(
     view: ListView,
-    provider: D3IcyVeinsProvider
-) : ListPresenterProvider, D3IcyVeinsListener {
+    provider: D3IcyVeinsContract.Provider
+) : ListPresenterProvider, D3IcyVeinsContract.Listener {
+
     private var weakView: WeakReference<ListView>? = WeakReference(view)
 
-    private var weakProvider: WeakReference<D3IcyVeinsProvider>? = WeakReference(provider)
+    private var weakProvider: WeakReference<D3IcyVeinsContract.Provider>? = WeakReference(provider)
 
     private var list: List<D3Class> = emptyList()
 
