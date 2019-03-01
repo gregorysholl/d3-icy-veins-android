@@ -57,15 +57,15 @@ class SkillFragment : Fragment() {
 
     private fun setupTexts(showRune: Boolean) {
         skillFragment_skillName.text = activeSkill?.skill?.name
-        skillFragment_runeName.text = if (showRune) activeSkill?.rune?.name else getString(R.string.skill_rune_any_choice)
+//        skillFragment_runeName.text = if (showRune) activeSkill?.rune?.name else getString(R.string.skill_rune_any_choice)
     }
 
     private fun setupImages(showRune: Boolean) {
         Glide.with(this).load(activeSkill?.skill?.image).into(skillFragment_skillImage)
-        if (showRune) {
-            Glide.with(this).load(activeSkill?.rune?.image).into(skillFragment_runeImage)
-        } else {
-            skillFragment_runeImage.visibility = View.GONE
-        }
+//        if (showRune) {
+//            Glide.with(this).load(activeSkill?.rune?.image).into(skillFragment_runeImage)
+//        } else {
+//            skillFragment_runeImage.visibility = View.GONE
+//        }
     }
 }

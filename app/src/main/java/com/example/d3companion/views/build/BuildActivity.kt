@@ -2,6 +2,7 @@ package com.example.d3companion.views.build
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.d3companion.R
 import com.example.d3companion.models.D3Build
 import com.example.d3companion.models.D3Class
@@ -33,19 +34,24 @@ class BuildActivity : AppCompatActivity() {
         supportActionBar?.title = buildInfo.className
         supportActionBar?.subtitle = buildInfo.tier + " Build"
 
-        buildActivity_name.text = buildInfo.name
-
-        addSkillFragments()
-    }
-
-    private fun addSkillFragments() {
-        buildInfo.skills.active.forEachIndexed { index, activeSkill ->
-            val id = if (index % 2 == 0) R.id.buildActivity_leftSkillContainer else R.id.buildActivity_rightSkillContainer
-            val ft = supportFragmentManager.beginTransaction()
-            ft.add(id, SkillFragment.newInstance(activeSkill))
-            ft.commit()
+        with(buildActivity_recyclerView) {
+            layoutManager = GridLayoutManager(context, 4)
+            adapter = BuildDetailAdapter(buildInfo.gear ?: emptyList(), buildInfo.skills)
         }
+//        buildActivity_recyclerView.adapter = BuildDetailAdapter(buildInfo.gear ?: emptyList(), buildInfo.skills)
+//        buildActivity_name.text = buildInfo.name
+
+//        addSkillFragments()
     }
+
+//    private fun addSkillFragments() {
+//        buildInfo.skills.active.forEachIndexed { index, activeSkill ->
+//            val id = if (index % 2 == 0) R.id.buildActivity_leftSkillContainer else R.id.buildActivity_rightSkillContainer
+//            val ft = supportFragmentManager.beginTransaction()
+//            ft.add(id, SkillFragment.newInstance(activeSkill))
+//            ft.commit()
+//        }
+//    }
 
     private fun initD3Build() {
         val inputStream = baseContext.resources?.openRawResource(R.raw.builds)
