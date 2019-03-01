@@ -34,24 +34,18 @@ class BuildActivity : AppCompatActivity() {
         supportActionBar?.title = buildInfo.className
         supportActionBar?.subtitle = buildInfo.tier + " Build"
 
+        val gridLayout = GridLayoutManager(baseContext, 4)
+        gridLayout.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+            override fun getSpanSize(position: Int): Int {
+                return if (position == 0) 4 else 1
+            }
+        }
+
         with(buildActivity_recyclerView) {
-            layoutManager = GridLayoutManager(context, 4)
+            layoutManager = gridLayout//GridLayoutManager(context, 4)
             adapter = BuildDetailAdapter(buildInfo.gear ?: emptyList(), buildInfo.skills)
         }
-//        buildActivity_recyclerView.adapter = BuildDetailAdapter(buildInfo.gear ?: emptyList(), buildInfo.skills)
-//        buildActivity_name.text = buildInfo.name
-
-//        addSkillFragments()
     }
-
-//    private fun addSkillFragments() {
-//        buildInfo.skills.active.forEachIndexed { index, activeSkill ->
-//            val id = if (index % 2 == 0) R.id.buildActivity_leftSkillContainer else R.id.buildActivity_rightSkillContainer
-//            val ft = supportFragmentManager.beginTransaction()
-//            ft.add(id, SkillFragment.newInstance(activeSkill))
-//            ft.commit()
-//        }
-//    }
 
     private fun initD3Build() {
         val inputStream = baseContext.resources?.openRawResource(R.raw.builds)
