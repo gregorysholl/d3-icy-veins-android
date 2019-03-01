@@ -39,9 +39,10 @@ class BuildActivity : AppCompatActivity() {
     }
 
     private fun addSkillFragments() {
-        for (activeSkill in buildInfo.skills.active) {
+        buildInfo.skills.active.forEachIndexed { index, activeSkill ->
+            val id = if (index % 2 == 0) R.id.buildActivity_leftSkillContainer else R.id.buildActivity_rightSkillContainer
             val ft = supportFragmentManager.beginTransaction()
-            ft.add(R.id.buildActivity_skillContainer, SkillFragment.newInstance(activeSkill))
+            ft.add(id, SkillFragment.newInstance(activeSkill))
             ft.commit()
         }
     }
