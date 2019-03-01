@@ -8,7 +8,7 @@
         tools:context=".views.build.SkillFragment">
 
     <!--<ImageView-->
-            <!--android:id="@+id/skillFragment_skillImage"-->
+            <!--android:id="@+id/skillFragment_skillButton"-->
             <!--android:layout_width="30dp"-->
             <!--android:layout_height="30dp"-->
             <!--android:background="@color/colorPrimary"/>-->
@@ -21,11 +21,11 @@
                 android:orientation="horizontal">
 
             <ImageView
-                    android:id="@+id/skillFragment_skillButton"
+                    android:id="@+id/skillFragment_skillImage"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginRight="8dp"
-                    android:background="@color/colorPrimary"/>
+            />
 
             <TextView
                     android:id="@+id/skillFragment_skillName"
@@ -48,7 +48,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginRight="8dp"
-                    android:background="@color/colorPrimary"/>
+            />
 
             <TextView
                     android:id="@+id/skillFragment_runeName"

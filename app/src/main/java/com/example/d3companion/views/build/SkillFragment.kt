@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
 
 import com.example.d3companion.R
 import com.example.d3companion.models.D3ActiveSkill
@@ -48,12 +49,27 @@ class SkillFragment : Fragment() {
     }
 
     private fun setupView() {
-        skillFragment_skillName.text = activeSkill?.skill?.name
+        val hasRune = activeSkill?.rune?.name?.isEmpty() == false
 
-        if (activeSkill?.rune?.name?.isEmpty() == false) {
-            skillFragment_runeName.text = activeSkill?.rune?.name
-        } else {
+        setupTexts(hasRune)
+        setupImages(hasRune)
+
+        if (!hasRune) {
             skillFragment_runeContainer.visibility = View.GONE
+        }
+    }
+
+    private fun setupTexts(showRune: Boolean) {
+        skillFragment_skillName.text = activeSkill?.skill?.name
+        if (showRune) {
+            skillFragment_runeName.text = activeSkill?.rune?.name
+        }
+    }
+
+    private fun setupImages(showRune: Boolean) {
+        Glide.with(this).load(activeSkill?.skill?.image).into(skillFragment_skillImage)
+        if (showRune) {
+            Glide.with(this).load(activeSkill?.rune?.image).into(skillFragment_runeImage)
         }
     }
 }
