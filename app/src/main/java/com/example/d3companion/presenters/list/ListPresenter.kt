@@ -14,16 +14,16 @@ class ListPresenter(
     provider: D3IcyVeinsContract.Provider
 ) : ListContract.Presenter, D3IcyVeinsContract.Listener {
 
-    private var weakView: WeakReference<ListContract.View>? = WeakReference(view)
+    private var weakView: WeakReference<ListContract.View> = WeakReference(view)
 
-    private var weakProvider: WeakReference<D3IcyVeinsContract.Provider>? = WeakReference(provider)
+    private var weakProvider: WeakReference<D3IcyVeinsContract.Provider> = WeakReference(provider)
 
     private var list: List<D3Class> = emptyList()
 
     private var selectedClassName: String? = null
 
     init {
-        weakProvider?.get()?.listener = this
+        weakProvider.get()?.listener = this
     }
 
     override fun getClasses() {
@@ -40,17 +40,17 @@ class ListPresenter(
 
     override fun getBuild(name: String) {
         if (selectedClassName == null) {
-            weakView?.get()?.showError()
+            weakView.get()?.showError()
             return
         }
 
         val build = list.firstOrNull { it.name == selectedClassName }?.builds?.firstOrNull { it.name == name }
         if (build == null) {
-            weakView?.get()?.showError()
+            weakView.get()?.showError()
             return
         }
 
-        weakView?.get()?.showBuildActivity(build)
+        weakView.get()?.showBuildActivity(build)
     }
 
     override fun onDataRetrieved(data: String) {
@@ -65,12 +65,12 @@ class ListPresenter(
     }
 
     override fun onError(message: String) {
-        weakView?.get()?.showError()
+        weakView.get()?.showError()
     }
 
     private fun showList() {
         if (list.isEmpty()) {
-            weakProvider?.get()?.obtainData()
+            weakProvider.get()?.obtainData()
             return
         }
 
@@ -79,14 +79,7 @@ class ListPresenter(
         } else {
             getClassViews()
         }
-        weakView?.get()?.showList(views)
-    }
-
-    private fun obtainData() {
-        if (!list.isEmpty()) {
-            return
-        }
-        weakProvider?.get()?.obtainData()
+        weakView.get()?.showList(views)
     }
 
     private fun getClassViews(): List<D3ViewElement> {
