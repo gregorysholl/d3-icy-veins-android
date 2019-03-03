@@ -23,7 +23,7 @@ class SkillViewHolder(
         if (hasName) {
             Glide.with(view).load(detail.image).into(imageView)
         } else {
-            imageView.visibility = View.GONE
+            imageView.setImageResource(R.drawable.d3_missing)
         }
     }
 }
