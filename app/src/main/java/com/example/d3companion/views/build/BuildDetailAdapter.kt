@@ -46,7 +46,7 @@ class BuildDetailAdapter(
         when (holder.itemViewType) {
             GEAR -> {
                 val gearHolder = holder as GearViewHolder
-
+                gearHolder.bindData(gear)
             }
             else -> {
                 val detail = getDetail(position - 1)
@@ -67,8 +67,5 @@ class BuildDetailAdapter(
         } else {
             skillSet.passive[position - activeSkillSize]
         }
-    }
-
-    inner class GearViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
     }
 }

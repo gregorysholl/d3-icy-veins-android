@@ -3,14 +3,43 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:gravity="center">
 
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+    <ImageView
+            android:id="@+id/gearFragment_helmetImage"
+            android:layout_width="64dp"
+            android:layout_height="128dp"
             android:layout_margin="8dp"
-            android:text="THIS IS MY GEAR FRAGMENT"
-            android:textSize="60sp"
-            android:gravity="center"/>
+            />
+
+    <ImageView
+            android:id="@+id/gearFragment_chestImage"
+            android:layout_width="64dp"
+            android:layout_height="128dp"
+            android:layout_margin="8dp"
+    />
+
+    <ImageView
+            android:id="@+id/gearFragment_beltImage"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_margin="8dp"
+    />
+
+    <ImageView
+            android:id="@+id/gearFragment_pantsImage"
+            android:layout_width="64dp"
+            android:layout_height="128dp"
+            android:layout_margin="8dp"
+    />
+
+    <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="8dp"-->
+            <!--android:text="THIS IS MY GEAR FRAGMENT"-->
+            <!--android:textSize="60sp"-->
+            <!--android:gravity="center"/>-->
 
 </LinearLayout>
